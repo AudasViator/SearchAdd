@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QVBoxLayout>
 #include <QScrollBar>
+#include <QMessageBox>
 
 #include <cassert>
 #include <cmath>

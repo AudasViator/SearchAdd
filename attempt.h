@@ -17,11 +17,15 @@ public:
     explicit Attempt(QWidget *parent = 0);
     ~Attempt();
 
+    bool isAdditionsEntered();
+
     std::vector<float> getAdditionsPercentage();
 
     void setProperties(std::vector<float> properties);
 
     void disableEditing();
+
+    void setAttemptNumber(int attemptNumber);
 
     Attempt* clone();
 

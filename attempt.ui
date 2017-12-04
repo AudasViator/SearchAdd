@@ -34,9 +34,9 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>14</x>
-     <y>14</y>
-     <width>321</width>
+     <x>10</x>
+     <y>30</y>
+     <width>331</width>
      <height>161</height>
     </rect>
    </property>
@@ -208,6 +208,22 @@
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="numberLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>331</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Попытка</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
  </widget>
  <resources/>

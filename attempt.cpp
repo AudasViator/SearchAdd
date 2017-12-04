@@ -20,6 +20,14 @@ Attempt::~Attempt()
     delete ui;
 }
 
+bool Attempt::isAdditionsEntered()
+{
+    return !(ui->calciumEdit->text().isEmpty()
+                || ui->titaniumEdit->text().isEmpty()
+                || ui->zincEdit->text().isEmpty()
+                || ui->siliconEdit->text().isEmpty());
+}
+
 std::vector<float> Attempt::getAdditionsPercentage()
 {
     std::vector<float> additionsPercentage(4);
@@ -50,6 +58,11 @@ void Attempt::disableEditing()
     disableQLineEdit(ui->titaniumEdit);
     disableQLineEdit(ui->zincEdit);
     disableQLineEdit(ui->siliconEdit);
+}
+
+void Attempt::setAttemptNumber(int attemptNumber)
+{
+    ui->numberLabel->setText("Попытка №" + QString::number(attemptNumber));
 }
 
 Attempt *Attempt::clone()

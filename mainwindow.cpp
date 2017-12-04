@@ -7,6 +7,9 @@ MainWindow::MainWindow(int studentNumber, QWidget *parent) :
 {
     this->studentNumber = studentNumber;
     ui->setupUi(this);
+    setWindowTitle("Поиск добавок");
+
+    ui->studentNumberLabel->setText("Студент №" + QString::number(studentNumber));
 
     scrollWidget = new QWidget;
     scrollWidget->setLayout(new QVBoxLayout);
@@ -34,6 +37,8 @@ void MainWindow::addNewAttempt() {
     }
 
     attempts.push_back(attempt);
+
+    attempt->setAttemptNumber(attempts.size());
     ui->attemptNumber->display((int) attempts.size());
 }
 
@@ -97,7 +102,29 @@ bool MainWindow::isPropertiesCorrect(std::vector<float> properties) {
 void MainWindow::on_checkButton_clicked()
 {
     auto lastAttempt = attempts.back();
-    auto properties = convertAdditionsToProperties(lastAttempt->getAdditionsPercentage(), studentNumber);
+
+    if (!lastAttempt->isAdditionsEntered()) {
+        return;
+    }
+
+    auto lastAdditions = lastAttempt->getAdditionsPercentage();
+
+    if (lastAdditions[1] > 2.0f) {
+        QMessageBox::information(this, "Ошибка", "Слишком много титана", QMessageBox::Yes);
+        return;
+    }
+
+    float sumOfAdditions;
+    for (auto addition : lastAdditions) {
+        sumOfAdditions += addition;
+    }
+    if (sumOfAdditions > 20) {
+        QMessageBox::information(this, "Ошибка", "Слишком много добавок", QMessageBox::Yes);
+        return;
+    }
+
+    lastAttempt->disableEditing();
+    auto properties = convertAdditionsToProperties(lastAdditions, studentNumber);
     lastAttempt->setProperties(properties);
 
     if (isPropertiesCorrect(properties)) {

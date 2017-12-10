@@ -114,7 +114,7 @@ void MainWindow::on_checkButton_clicked()
         return;
     }
 
-    float sumOfAdditions;
+    float sumOfAdditions = 0.0f;
     for (auto addition : lastAdditions) {
         sumOfAdditions += addition;
     }
